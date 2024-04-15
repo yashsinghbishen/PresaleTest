@@ -20,8 +20,5 @@ module.exports = {
         sablierLiner : "0xFCF737582d167c7D20A336532eb8BCcA8CF8e350"
       }
     },
-    mainnetFork: {
-      url: process.env.ALCHEMY_MAINNET_RPC_URL, // Replace with your Alchemy mainnet RPC URL
-    },
   },
 };
