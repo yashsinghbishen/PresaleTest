@@ -1,0 +1,43 @@
+Coding Challenge: Senior Blockchain Lead
+About
+This challenge is designed for a senior blockchain lead specializing in Solidity. You will create a simple pre-sale contract for an ERC20 token. This test will help us understand your ability to integrate with different protocols, prioritize features, and develop in a minimal, viable, and optimized manner.
+
+Goal
+To assess your proficiency in Solidity and your understanding of blockchain protocols such as Uniswap, Aerdrome, UNCX, and Sablier. Your ability to design systems, write effective tests, and use Git effectively are also key components of this evaluation.
+
+Problem Statement
+You are tasked with developing a smart contract for the pre-sale of a new ERC20 token. Investors should be able to contribute using specified tokens. Upon reaching the funding target, the admin can transfer funds to create a liquidity pool on either Uniswap or Aerdrome and subsequently lock the LP tokens in a TimeLock contract (e.g., UNCX). Additionally, tokens bought by users should be vested directly through Sablier.
+
+Key Requirements
+Smart Contract Development: Develop the ERC20 pre-sale smart contract using Solidity.
+Integration with Protocols:
+Enable funding using specified tokens (WETH).
+Integrate with Uniswap or Aerdrome to create liquidity pools upon reaching the funding goal.
+Lock LP tokens using a TimeLock contract like UNCX.
+Investors pruchased tokens should undergo vesting. Utilize Sablier to implement vesting with 30 days cliff and 150 days of linear vesting.
+Testing and Optimization:
+Utilize Foundry for smart contract development and testing.
+Write comprehensive tests for your contracts.
+Ensure the code is optimized for gas usage and security.
+Git Workflow: Utilize Git for version control, demonstrating clean and structured commit history.
+Bonus Objective
+Provide a dynamic choice between Uniswap and Aerdrome through admin settings.
+Implement an emergency withdraw function for admin to handle unforeseen situations.
+Add functionality to adjust vesting schedules based on the amount of investment.
+Acceptance Criteria
+Smart contracts should compile without errors and pass all the tests.
+The pre-sale should cap at a specified funding target and reject further investments.
+Liquidity pool creation and LP token locking must be functional as per the design.
+Direct vesting through Sablier should be correctly implemented and tested.
+Code should adhere to best practices in terms of security, efficiency, and documentation.
+How to Submit the Challenge
+GitHub Repository:
+
+Fork the provided repository and commit your code to this fork.
+Make sure your repository is public to allow us to review your Git workflow.
+Include a README with explanations of your design decisions and architecture.
+Loom Video:
+
+Record a video explaining your contracts, their functions, and how they interact with other protocols.
+Discuss any challenges you faced and how you addressed them.
+Deadline: 3-day from the date and time this document was received.
