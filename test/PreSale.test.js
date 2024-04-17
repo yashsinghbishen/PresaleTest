@@ -538,7 +538,7 @@ describe("Presale Contract", function () {
         .withArgs(
           provider[0].address,
           amount,
-          amount * conversionRate,
+          amount * conversionRate / ethers.parseEther("1"),
           captureValue
         );
 
@@ -551,7 +551,7 @@ describe("Presale Contract", function () {
       expect(data[0]).to.equals(provider[0].address);
       expect(data[2] - data[1]).to.equals(range[2]);
       expect(data[6] - data[1]).to.equals(range[3]);
-      expect(ethers.toBigInt(data[10][0])).to.equals(amount * conversionRate);
+      expect(ethers.toBigInt(data[10][0])).to.equals((amount * conversionRate) / ethers.parseEther("1"));
     });
 
     it("should invest successfully when amount is less than threshold", async function () {
@@ -587,7 +587,7 @@ describe("Presale Contract", function () {
         .withArgs(
           provider[0].address,
           amount,
-          amount * conversionRate,
+          amount * conversionRate / ethers.parseEther("1"),
           captureValue
         );
 
@@ -596,7 +596,7 @@ describe("Presale Contract", function () {
       expect(data[0]).to.equals(provider[0].address);
       expect(data[2] - data[1]).to.equals(newCliff);
       expect(data[6] - data[1]).to.equals(newDurtion);
-      expect(ethers.toBigInt(data[10][0])).to.equals(amount * conversionRate);
+      expect(ethers.toBigInt(data[10][0])).to.equals((amount * conversionRate) / ethers.parseEther("1"));
     });
 
     it("should invest up to threshold when amount exceeds threshold", async function () {

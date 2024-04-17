@@ -4,13 +4,17 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
-import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/ITokenLock.sol";
 import "./interfaces/IAerodromeRouter.sol";
 import {ISablierV2LockupLinear} from "@sablier/v2-core/src/interfaces/ISablierV2LockupLinear.sol";
 import {Broker, LockupLinear} from "@sablier/v2-core/src/types/DataTypes.sol";
 
+/**
+ * @title PreSale
+ * @dev PreSale smart contract with vesting in Sablier and Locking LP's in UNCX
+ * @author Yogesh Singh(yashsinghbishen@gmail.com)
+ */
 contract PreSale is Ownable {
     IERC20 public investmentToken;
     IERC20 public icoToken;
@@ -184,6 +188,14 @@ contract PreSale is Ownable {
     }
 
     /**
+     * This method will allow to change Aerodrome Router
+     * @param _aerodromeRouterAddress Aerodrome router address
+     */
+    function setAerodromeRouter(address _aerodromeRouterAddress) external onlyOwner {
+        aerodromeRouterAddress = _aerodromeRouterAddress;
+    }
+
+    /**
      * @notice Allows admin to change the threshold
      * @param _threshold new threshold for PreSale
      */
@@ -241,6 +253,7 @@ contract PreSale is Ownable {
 
             isUniswapPair = true;
         } else {
+            require(aerodromeRouterAddress != address(0), "Aerodrome Router not defined");
             icoToken.approve(aerodromeRouterAddress, _icoTokenAmount);
             IAerodromeRouter router = IAerodromeRouter(aerodromeRouterAddress);
             investmentToken.approve(aerodromeRouterAddress, tokenBalance);
@@ -354,7 +367,7 @@ contract PreSale is Ownable {
         investments[msg.sender] += amount;
         totalInvested += amount;
 
-        uint256 _icoReceived = amount * conversionRate;
+        uint256 _icoReceived = (amount * conversionRate) / 1 ether;
 
         icoToken.transferFrom(treasury, address(this), _icoReceived);
 
